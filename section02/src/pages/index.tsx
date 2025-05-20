@@ -1,8 +1,6 @@
 
 export default function Home() {
   return (
-    <>
-      <h1>안녕</h1>
-    </>
+      <h1>인덱스</h1>
   );
 }
