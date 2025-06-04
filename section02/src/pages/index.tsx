@@ -16,7 +16,8 @@ export const getStaticProps = async () => {
     props: {
       allBooks,
       recoBooks,
-    }
+    },
+    revalidate: 3,
   }
 };
 export default function Home({ allBooks, recoBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
