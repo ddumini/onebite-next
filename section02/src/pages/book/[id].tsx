@@ -1,8 +1,19 @@
 import fetchOneBook from '@/lib/fetch-one-book';
 import styles from './[id].module.css';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 
-export const getServerSideProps = async (context : GetServerSidePropsContext) => {
+export const getStaticPaths = () => {
+  return {
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
+    fallback: false,
+    // fallback: 대체, 대비책, 보험 path값이 존재하지 않을 때 대비책으로 사용.
+    // false : 404 페이지 반환
+    // true : 비동기 데이터 로드
+    // 'blocking' : 동기 데이터 로드
+  };
+}
+
+export const getStaticProps = async (context : GetStaticPropsContext) => {
 
   const id = context.params!.id;
   const book = await fetchOneBook(Number(id));
@@ -13,7 +24,7 @@ export const getServerSideProps = async (context : GetServerSidePropsContext) =>
   }
 }
 
-export default function Page({book} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Page({book} : InferGetStaticPropsType<typeof getStaticProps>) {
   if (!book) {
     return <div>문제가 발생했습니다 다시 시도하세요</div>;
   }
