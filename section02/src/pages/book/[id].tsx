@@ -1,15 +1,16 @@
 import fetchOneBook from '@/lib/fetch-one-book';
 import styles from './[id].module.css';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths = () => {
   return {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
-    fallback: false,
+    fallback: 'blocking',
     // fallback: 대체, 대비책, 보험 path값이 존재하지 않을 때 대비책으로 사용.
     // false : 404 페이지 반환
-    // true : 비동기 데이터 로드
-    // 'blocking' : 동기 데이터 로드
+    // 'blocking' : 즉시 생성 (ssr처럼) 새로 신규 데이터가 계속 추가되는 경우
+    // true : Props 없는 페이지 반환, props 계산 후 Props만 따로 반환
   };
 }
 
@@ -25,6 +26,10 @@ export const getStaticProps = async (context : GetStaticPropsContext) => {
 }
 
 export default function Page({book} : InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
   if (!book) {
     return <div>문제가 발생했습니다 다시 시도하세요</div>;
   }
