@@ -17,7 +17,8 @@ export const getStaticProps = async () => {
       allBooks,
       recoBooks,
     },
-    revalidate: 3,
+    // revalidate: 3, // 시간 기반 3초마다 재생성
+    
   }
 };
 export default function Home({ allBooks, recoBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
