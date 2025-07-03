@@ -1,4 +1,5 @@
 import BookItem from '@/components/book-item';
+import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
 import { BookData } from '@/types';
 import { delay } from '@/util/delay';
 import { Suspense } from 'react';
@@ -32,7 +33,9 @@ export default function Page({
   };
 }) {
   return (
-    <Suspense key={searchParams.q || ""} fallback={<div>Loading...</div>}>
+    <Suspense key={searchParams.q || ""} fallback={<>
+      <BookListSkeleton count={3} />
+    </>}>
       {/* streaming 하도록 설정, 비동기 처리 중 대기 중일 때 보여줄 컴포넌트 */}
       {/* 키 값을 주면 쿼리스트링 값만 변경될 때에도 로딩 상태로 돌아가게 설정(searchParams.q 값이 변경될 때마다) */}
       <SearchResult q={searchParams.q || ""} />
