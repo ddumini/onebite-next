@@ -13,11 +13,10 @@ import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
 
 async function AllBooks() {
   await delay(1500);
- const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
-  {
-    cache: 'force-cache',
-  }
- );
+ const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {
+   cache: 'no-store',
+  //  cache: 'force-cache',
+ });
  if(!response.ok) {
   return <div>오류가 발생했습니다...</div>;
  }
@@ -31,7 +30,8 @@ async function AllBooks() {
 async function RecoBooks() {
   await delay(3000);
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`, {
-    next: {revalidate: 3},
+    cache: 'no-store',
+    // next: { revalidate: 3 },
   });
   if(!response.ok) {
     return <div>오류가 발생했습니다...</div>;

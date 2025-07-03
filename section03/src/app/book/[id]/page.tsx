@@ -3,6 +3,7 @@ import { BookData } from "@/types";
 import NotFound from "@/app/not-found";
 
 // export const dynamicParams = false;
+// 아래 명시된 파라미터 값만 생성되고 나머지는 404 처리됨
 
 export function generateStaticParams() {
   return [{id: '1'}, {id: '2'}, {id: '3'}];
