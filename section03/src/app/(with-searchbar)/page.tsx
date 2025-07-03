@@ -2,6 +2,12 @@ import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
 
+// export const dynamic = 'force-dynamic'; 
+// 1. auto : 아무 것도 강제하지 않음
+// 2. force-dynamic : 강제로 dynamic 페이지로 설정
+// 3. force-static : 강제로 static 페이지로 설정
+// 4. error : 강제로 static 페이지로 설정 but static하면 안되는 이유가 있다면 빌드 오류
+
 async function AllBooks() {
  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
   {

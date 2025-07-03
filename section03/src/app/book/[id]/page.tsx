@@ -2,7 +2,7 @@ import style from "./page.module.css";
 import { BookData } from "@/types";
 import NotFound from "@/app/not-found";
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 export function generateStaticParams() {
   return [{id: '1'}, {id: '2'}, {id: '3'}];
